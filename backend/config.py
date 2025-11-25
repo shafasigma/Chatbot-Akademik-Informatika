@@ -10,18 +10,23 @@ app = Flask(__name__)
 MYSQL_URL = os.environ.get("MYSQL_URL")
 
 if MYSQL_URL:
-    # Convert "mysql://" → "mysql+pymysql://"
+    # Convert "mysql://" → "mysql+mysqlconnector://"
     if MYSQL_URL.startswith("mysql://"):
-        MYSQL_URL = MYSQL_URL.replace("mysql://", "mysql+pymysql://", 1)
+        MYSQL_URL = MYSQL_URL.replace("mysql://", "mysql+mysqlconnector://", 1)
 
     app.config["SQLALCHEMY_DATABASE_URI"] = MYSQL_URL
 else:
-    # Local fallback
+    # ===========================
+    # LOCAL FALLBACK
+    # ===========================
     DB_USER = "root"
     DB_PASS = ""
     DB_HOST = "localhost"
     DB_NAME = "chatbot_db"
-    app.config["SQLALCHEMY_DATABASE_URI"] = f"mysql+pymysql://{DB_USER}:{DB_PASS}@{DB_HOST}/{DB_NAME}"
+
+    app.config["SQLALCHEMY_DATABASE_URI"] = (
+        f"mysql+mysqlconnector://{DB_USER}:{DB_PASS}@{DB_HOST}/{DB_NAME}"
+    )
 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["SECRET_KEY"] = "supersecret"
