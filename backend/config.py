@@ -2,8 +2,8 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
-
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
 if DATABASE_URL:
@@ -26,5 +26,6 @@ UPLOADS_DIR = os.path.join(BASE_DIR, "uploads")
 os.makedirs(MODEL_DIR, exist_ok=True)
 os.makedirs(os.path.join(UPLOADS_DIR, "datasets"), exist_ok=True)
 os.makedirs(os.path.join(UPLOADS_DIR, "pdfs"), exist_ok=True)
+
 
 
