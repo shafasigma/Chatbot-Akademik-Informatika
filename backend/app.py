@@ -5,7 +5,9 @@ from backend.config import app, db
 from backend.routes.user_routes import user_bp
 from backend.routes.chatbot_routes import chat_bp
 from backend.routes.admin_routes import admin_bp
+import pymysql
 
+pymysql.install_as_MySQLdb()
 CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
 app.register_blueprint(user_bp, url_prefix="/api")
@@ -18,3 +20,4 @@ if __name__ == "__main__":
 
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
+
