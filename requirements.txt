@@ -17,4 +17,5 @@ itsdangerous==2.2.0
 click==8.2.1
 requests==2.32.3
 tqdm==4.67.1
+pymysql
 h5py==3.14.0
